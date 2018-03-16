@@ -8,9 +8,9 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "packagr": "ng-packagr -p ng-package.json"
   },
-  "private": true,
   "peerDependencies": {
     "codemirror": ">=5.0.0",
     "@angular/core": ">=5.0.0",
@@ -27,9 +27,9 @@
     "@angular/compiler": "^5.2.0",
     "@angular/compiler-cli": "^5.2.0",
     "@angular/core": "^5.2.0",
+    "@angular/flex-layout": "^5.0.0-beta.13",
     "@angular/forms": "^5.2.0",
     "@angular/http": "^5.2.0",
-    "@angular/flex-layout": "^5.0.0-beta.13",
     "@angular/language-service": "^5.2.0",
     "@angular/material": ">=5.0.0",
     "@angular/platform-browser": "^5.2.0",
@@ -48,6 +48,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^2.2.0",
     "normalize.css": "^8.0.0",
     "protractor": "~5.1.2",
     "rxjs": "^5.5.6",
