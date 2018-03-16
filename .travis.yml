@@ -16,6 +16,4 @@ deploy:
     secure: $NPM_TOKEN
   skip_cleanup: true
   on:
-    repo: smnbbrv/ngx-mat-codemirror
-    branch: master
     tags: true
