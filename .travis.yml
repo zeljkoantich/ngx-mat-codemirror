@@ -1,0 +1,16 @@
+language: node_js
+
+node_js:
+  - '8'
+
+script:
+  - npm run packagr
+
+deploy:
+  provider: npm
+  api_key:
+    secure: $NPM_TOKEN
+  skip_cleanup: true
+  on:
+    branch: master
+    tags: true
