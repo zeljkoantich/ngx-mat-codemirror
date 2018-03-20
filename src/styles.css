@@ -1,7 +1,0 @@
-.auto-height .CodeMirror {
-  height: auto;
-}
-
-.auto-height .CodeMirror-scroll {
-  max-height: 250px;
-}

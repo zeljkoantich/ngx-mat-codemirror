@@ -14,7 +14,7 @@ import {
   Optional,
   Output,
   Self,
-  ViewChild,
+  ViewChild, ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { Editor, EditorChangeLinkedList, EditorFromTextArea, ScrollInfo, } from 'codemirror';
@@ -25,7 +25,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 @Component({
   selector: 'mat-codemirror',
   templateUrl: './mat-codemirror.component.html',
-  styleUrls: ['./mat-codemirror.component.css'],
+  styleUrls: ['./mat-codemirror.component.scss'],
   providers: [
     {
       provide: MatFormFieldControl,
@@ -34,28 +34,81 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   ],
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, ControlValueAccessor, MatFormFieldControl<string>, DoCheck {
-  /* mat */
-  static materialId = 0;
+
+  private static materialId = 0;
 
   stateChanges = new Subject<void>();
 
-  @HostBinding()
-  id = `MatCodemirrorComponent-${ MatCodemirrorComponent.materialId++ }`;
-
-  controlType = 'mat-codemirror-input';
+  @HostBinding() id = `mat-codemirror-component-${ MatCodemirrorComponent.materialId++ }`;
 
   @HostBinding('attr.aria-describedby') describedBy = '';
+
+  private onChange: (_: string) => void;
+  private onTouched: () => void;
+
+  private _required = false;
+  private _focused = false;
+  private _disabled = false;
+  private _placeholder: string;
+  private _value = '';
+
+  private _differ: KeyValueDiffer<string, any>;
+  private _options: any;
+
+  @HostBinding('class.ngx-mat-codemirror') private ngxMatCodemirror = true;
+
+  /* class applied to the created textarea */
+  @Input() className = '';
+  /* name applied to the created textarea */
+  @Input() name = 'codemirror';
+  /* autofocus setting applied to the created textarea */
+  @Input() autoFocus = false;
+
+  /* preserve previous scroll position after updating value */
+  @Input() preserveScrollPosition = false;
+  /* called when the text cursor is moved */
+  @Output() cursorActivity = new EventEmitter<Editor>();
+  /* called when the editor is focused or loses focus */
+  @Output() focusChange = new EventEmitter<boolean>();
+  /* called when the editor is scrolled */
+  @Output() scroll = new EventEmitter<ScrollInfo>();
+
+  @ViewChild('ref') ref: ElementRef;
+
+  codeMirror: EditorFromTextArea;
+
+  constructor(
+    @Optional() @Self() public ngControl: NgControl, // mat
+    private _differs: KeyValueDiffers,
+    private _ngZone: NgZone
+  ) {
+    if (this.ngControl != null) {
+      this.ngControl.valueAccessor = this;
+    }
+  }
+
+  @HostBinding('class.floating')
+  get shouldLabelFloat() {
+    return this.focused || !this.empty;
+  }
 
   setDescribedByIds(ids: string[]) {
     this.describedBy = ids.join(' ');
   }
 
-  onContainerClick(event: MouseEvent) {
-    // if ((event.target as Element).tagName.toLowerCase() != 'input') {
-    //   this.elRef.nativeElement.querySelector('input').focus();
-    // }
+  onContainerClick(event: MouseEvent) {}
+
+  @Input()
+  get required() {
+    return this._required;
+  }
+
+  set required(req) {
+    this._required = coerceBooleanProperty(req);
+    this.stateChanges.next();
   }
 
   get errorState() {
@@ -66,41 +119,44 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
   get placeholder() {
     return this._placeholder;
   }
+
   set placeholder(plh) {
     this._placeholder = plh;
     this.stateChanges.next();
-  }
-  private _placeholder: string;
-
-  get focused() {
-    return this.isFocused;
   }
 
   get empty() {
     return !this.value;
   }
 
-  @HostBinding('class.floating')
-  get shouldLabelFloat() {
-    return this.focused || !this.empty;
+  get value() {
+    return this._value;
+  }
+
+  set value(value: string) {
+    this._value = value;
+    this.updateLineNumbers();
+    this.stateChanges.next();
   }
 
   @Input()
-  get required() {
-    return this._required;
+  get disabled() {
+    return this._disabled;
   }
-  set required(req) {
-    this._required = coerceBooleanProperty(req);
+
+  set disabled(dis) {
+    this._disabled = coerceBooleanProperty(dis);
     this.stateChanges.next();
   }
-  private _required = false;
 
-  /* class applied to the created textarea */
-  @Input() className = '';
-  /* name applied to the created textarea */
-  @Input() name = 'codemirror';
-  /* autofocus setting applied to the created textarea */
-  @Input() autoFocus = false;
+  get focused() {
+    return this._focused;
+  }
+
+  set focused(val) {
+    this._focused = val;
+    this.stateChanges.next();
+  }
 
   /**
    * set options for codemirror
@@ -114,57 +170,6 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
     }
   }
 
-  /* preserve previous scroll position after updating value */
-  @Input() preserveScrollPosition = false;
-  /* called when the text cursor is moved */
-  @Output() cursorActivity = new EventEmitter<Editor>();
-  /* called when the editor is focused or loses focus */
-  @Output() focusChange = new EventEmitter<boolean>();
-  /* called when the editor is scrolled */
-  @Output() scroll = new EventEmitter<ScrollInfo>();
-  @ViewChild('ref') ref: ElementRef;
-  _value = '';
-  get value() {
-    return this._value;
-  }
-  set value(value: string) {
-    this._value = value;
-    this.stateChanges.next();
-  }
-
-  _disabled = false;
-  @Input()
-  get disabled() {
-    return this._disabled;
-  }
-  set disabled(dis) {
-    this._disabled = coerceBooleanProperty(dis);
-    this.stateChanges.next();
-  }
-
-  _isFocused = false;
-  get isFocused() {
-    return this._isFocused;
-  }
-  set isFocused(val) {
-    this._isFocused = val;
-    this.stateChanges.next();
-  }
-
-  codeMirror: EditorFromTextArea;
-  private _differ: KeyValueDiffer<string, any>;
-  private _options: any;
-
-  constructor(
-    @Optional() @Self() public ngControl: NgControl, // mat
-    private _differs: KeyValueDiffers,
-    private _ngZone: NgZone
-  ) {
-    if (this.ngControl != null) {
-      this.ngControl.valueAccessor = this;
-    }
-  }
-
   ngAfterViewInit() {
     if (!this.ref) {
       return;
@@ -173,6 +178,7 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
     const {fromTextArea} = require('codemirror');
 
     this.codeMirror = fromTextArea(this.ref.nativeElement, this._options);
+    this.updateLineNumbers();
     this._ngZone.runOutsideAngular(() => {
       this.codeMirror.on('change', this.codemirrorValueChanged.bind(this));
       this.codeMirror.on('cursorActivity', this.cursorActive.bind(this));
@@ -226,7 +232,7 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
 
   focusChanged(focused: boolean) {
     this.onTouched();
-    this.isFocused = focused;
+    this.focused = focused;
     this.focusChange.emit(focused);
   }
 
@@ -238,7 +244,6 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
     this.cursorActivity.emit(cm);
   }
 
-  /** Implemented as part of ControlValueAccessor. */
   writeValue(value: string): void {
     if (value === null) {
       return;
@@ -270,31 +275,27 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
     this.onChange(this.value);
   }
 
-  /** Implemented as part of ControlValueAccessor. */
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
 
-  /** Implemented as part of ControlValueAccessor. */
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  /** Implemented as part of ControlValueAccessor. */
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     this.setOptionIfChanged('readOnly', this.disabled);
   }
 
-  /** Implemented as part of ControlValueAccessor. */
-  private onChange = (_: any) => {
-  }
-  /** Implemented as part of ControlValueAccessor. */
-  private onTouched = () => {
-  }
-
   private normalizeLineEndings(str: string) {
     return (str || '').replace(/\r\n|\r/g, '\n');
+  }
+
+  private updateLineNumbers() {
+    if (this.codeMirror) {
+      this.codeMirror.setOption('lineNumbers', !!/\n/.test(this._value));
+    }
   }
 
 }

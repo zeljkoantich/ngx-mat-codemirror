@@ -1,0 +1,9 @@
+.ngx-mat-codemirror {
+  .CodeMirror {
+    height: auto;
+  }
+
+  .CodeMirror-scroll {
+    max-height: 250px;
+  }
+}

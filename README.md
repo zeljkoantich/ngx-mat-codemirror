@@ -32,17 +32,16 @@ Then use it:
 ```html
 <mat-card-content>
   <mat-form-field>
-    <mat-codemirror formControlName="yaml"
-                    class="auto-height"
-                    required
-                    (focusChange)="lineNumbers = $event"
-                    [options]="{ lineNumbers: lineNumbers, theme: 'neat', mode: 'yaml' }"
-                    placeholder="YAML"></mat-codemirror>
+    <mat-codemirror formControlName="yaml" required [options]="{ theme: 'neat', mode: 'yaml' }" placeholder="YAML"></mat-codemirror>
     <mat-error *ngIf="form.get('yaml').hasError('required')">required</mat-error>
     <mat-hint>YAML config sample</mat-hint>
   </mat-form-field>
 </mat-card-content>
 ```
+
+## lineNumbers option
+
+The line numbers are automatically shown / hidden depending on the content of the input. If there is more than one line, they are shown, otherwise hidden.
 
 ## License
 
