@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/smnbbrv/ngx-mat-codemirror.svg?branch=master)](https://travis-ci.org/smnbbrv/ngx-mat-codemirror)
-
 # ngx-mat-codemirror
+
+[![Build Status](https://travis-ci.org/smnbbrv/ngx-mat-codemirror.svg?branch=master)](https://travis-ci.org/smnbbrv/ngx-mat-codemirror)
 
 A code editor input for Angular Material 2+ based on Codemirror.
 
@@ -11,6 +11,13 @@ npm i ngx-mat-codemirror codemirror
 ```
 
 ## Usage
+
+First, import all the necessary codemirror modes (the languages that you are going to use) in the `main.ts`:
+
+```ts
+import 'codemirror/mode/sass/sass';
+import 'codemirror/mode/yaml/yaml';
+```
 
 Import module whenever you need to use the code editor:
 
