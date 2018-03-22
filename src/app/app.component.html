@@ -14,7 +14,7 @@
     <mat-card-title>Codemirror: SASS</mat-card-title>
     <mat-card-content fxLayout="column">
       <mat-form-field>
-        <mat-codemirror formControlName="sass" required [options]="{ theme: 'neat', mode: 'sass' }" placeholder="CSS"></mat-codemirror>
+        <mat-codemirror formControlName="sass" required [options]="{ theme: 'eclipse', mode: 'sass' }" placeholder="SASS code"></mat-codemirror>
         <mat-error *ngIf="form.get('sass').hasError('required')">required</mat-error>
         <mat-hint>SASS sample</mat-hint>
       </mat-form-field>
@@ -25,7 +25,7 @@
     <mat-card-title>Codemirror: YAML</mat-card-title>
     <mat-card-content fxLayout="column">
       <mat-form-field>
-        <mat-codemirror formControlName="yaml" required [options]="{ theme: 'neat', mode: 'yaml' }" placeholder="YAML"></mat-codemirror>
+        <mat-codemirror formControlName="yaml" required [options]="{ theme: 'neat', mode: 'yaml' }" placeholder="YAML code"></mat-codemirror>
         <mat-error *ngIf="form.get('yaml').hasError('required')">required</mat-error>
         <mat-hint>YAML config sample</mat-hint>
       </mat-form-field>

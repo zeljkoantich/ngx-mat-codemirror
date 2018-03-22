@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "dist-demo",
       "assets": [
         "assets",
         "favicon.ico"
@@ -23,7 +23,8 @@
         "../node_modules/normalize.css/normalize.css",
         "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
         "../node_modules/codemirror/lib/codemirror.css",
-        "../node_modules/codemirror/theme/neat.css"
+        "../node_modules/codemirror/theme/neat.css",
+        "../node_modules/codemirror/theme/eclipse.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
