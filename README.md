@@ -12,6 +12,12 @@ A code editor input for [Angular Material 2+](https://material.angular.io/) base
 npm i -S ngx-mat-codemirror codemirror
 ```
 
+and typings for codemirror:
+
+```sh
+npm i -D @types/codemirror
+```
+
 ## Configuring styles
 
 First, import `node_modules/codemirror/lib/codemirror.css` into your project.
