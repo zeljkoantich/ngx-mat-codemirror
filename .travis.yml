@@ -5,6 +5,7 @@ node_js:
 
 script:
   - npm run build
+  - cp dist-demo/index.html dist-demo/404.html
   - npm run packagr
 
 before_deploy:
