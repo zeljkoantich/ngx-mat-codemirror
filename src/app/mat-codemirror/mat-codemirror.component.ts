@@ -14,7 +14,8 @@ import {
   Optional,
   Output,
   Self,
-  ViewChild, ViewEncapsulation,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { Editor, EditorChangeLinkedList, EditorFromTextArea, ScrollInfo, } from 'codemirror';
