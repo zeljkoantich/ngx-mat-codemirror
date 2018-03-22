@@ -4,6 +4,8 @@
 
 A code editor input for [Angular Material 2+](https://material.angular.io/) based on [codemirror](https://codemirror.net).
 
+[Demo here](https://smnbbrv.github.io/ngx-mat-codemirror/).
+
 ## Installation
 
 ```sh
