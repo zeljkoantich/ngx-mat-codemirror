@@ -2,6 +2,20 @@
   "name": "ngx-mat-codemirror",
   "version": "1.0.1",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smnbbrv/ngx-mat-codemirror.git"
+  },
+  "keywords": [
+    "ngx",
+    "angular",
+    "angular2",
+    "material",
+    "material2",
+    "codemirror",
+    "code",
+    "editor"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
