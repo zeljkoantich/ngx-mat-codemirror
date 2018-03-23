@@ -12,6 +12,7 @@ export class AppComponent {
     input: new FormControl('', [
       Validators.required,
     ]),
+    html: new FormControl('', Validators.required),
     sass: new FormControl(`body {
   color: red;
 }`, [

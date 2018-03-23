@@ -11,6 +11,17 @@
   </mat-card>
 
   <mat-card>
+    <mat-card-title>Codemirror: HTML</mat-card-title>
+    <mat-card-content fxLayout="column">
+      <mat-form-field>
+        <mat-codemirror formControlName="html" required [options]="{ theme: 'eclipse', mode: 'htmlmixed' }" placeholder="HTML"></mat-codemirror>
+        <mat-error *ngIf="form.get('html').hasError('required')">required</mat-error>
+        <mat-hint>Type in some HTML code</mat-hint>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
     <mat-card-title>Codemirror: SASS</mat-card-title>
     <mat-card-content fxLayout="column">
       <mat-form-field>

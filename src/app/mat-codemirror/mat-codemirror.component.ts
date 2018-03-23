@@ -47,8 +47,8 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
 
   @HostBinding('attr.aria-describedby') describedBy = '';
 
-  private onChange: (_: string) => void;
-  private onTouched: () => void;
+  private onChange = (_: string) => null;
+  private onTouched = () => null;
 
   private _required = false;
   private _focused = false;

@@ -6,6 +6,7 @@ import { environment } from './environments/environment';
 
 import 'codemirror/mode/sass/sass';
 import 'codemirror/mode/yaml/yaml';
+import 'codemirror/mode/htmlmixed/htmlmixed';
 
 if (environment.production) {
   enableProdMode();
