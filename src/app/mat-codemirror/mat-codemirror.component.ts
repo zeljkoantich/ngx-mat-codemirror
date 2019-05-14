@@ -1,27 +1,9 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  DoCheck,
-  ElementRef,
-  EventEmitter,
-  HostBinding,
-  Input,
-  KeyValueDiffer,
-  KeyValueDiffers,
-  NgZone,
-  OnDestroy,
-  Optional,
-  Output,
-  Self,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { Editor, EditorChangeLinkedList, EditorFromTextArea, ScrollInfo, } from 'codemirror';
-import { MatFormFieldControl } from '@angular/material';
-import { Subject } from 'rxjs/Subject';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, ElementRef, EventEmitter, HostBinding, Input, KeyValueDiffer, KeyValueDiffers, NgZone, OnDestroy, Optional, Output, Self, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { MatFormFieldControl } from '@angular/material';
+import { Editor, EditorChangeLinkedList, EditorFromTextArea, ScrollInfo } from 'codemirror';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'mat-codemirror',
@@ -43,7 +25,7 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
 
   stateChanges = new Subject<void>();
 
-  @HostBinding() id = `mat-codemirror-component-${ MatCodemirrorComponent.materialId++ }`;
+  @HostBinding() id = `mat-codemirror-component-${MatCodemirrorComponent.materialId++}`;
 
   @HostBinding('attr.aria-describedby') describedBy = '';
 
@@ -100,7 +82,7 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
     this.describedBy = ids.join(' ');
   }
 
-  onContainerClick(event: MouseEvent) {}
+  onContainerClick(event: MouseEvent) { }
 
   @Input()
   get required() {
@@ -176,7 +158,7 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
       return;
     }
     // in order to allow for universal rendering, we import Codemirror runtime with `require` to prevent node errors
-    const {fromTextArea} = require('codemirror');
+    const { fromTextArea } = require('codemirror');
 
     this.codeMirror = fromTextArea(this.ref.nativeElement, this._options);
     this.updateLineNumbers();
