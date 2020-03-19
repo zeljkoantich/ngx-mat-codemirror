@@ -41,7 +41,7 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
   private _differ: KeyValueDiffer<string, any>;
   private _options: any;
 
-  @HostBinding('class.ngx-mat-codemirror') private ngxMatCodemirror = true;
+  @HostBinding('class.ngx-mat-codemirror') ngxMatCodemirror = true;
 
   /* class applied to the created textarea */
   @Input() className = '';
@@ -228,15 +228,17 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
   }
 
   writeValue(value: string): void {
-    if (value === null) {
+
+    if (!this.codeMirror) {
+      if (value) {
+        this.value = value;
+      }
       return;
     }
-    if (value && !this.codeMirror) {
-      this.value = value;
-      return;
+    if (value == null) {
+      value = '';
     }
     if (
-      value &&
       value !== this.codeMirror.getValue() &&
       this.normalizeLineEndings(this.codeMirror.getValue()) !==
       this.normalizeLineEndings(value)

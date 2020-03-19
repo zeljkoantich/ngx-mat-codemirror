@@ -5,6 +5,7 @@ import { MatCodemirrorModule } from './mat-codemirror/mat-codemirror.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule, MatInputModule } from '@angular/material';
+import {MatButtonModule} from '@angular/material/button'
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -19,7 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
     FlexLayoutModule,
     MatCardModule,
-    MatInputModule,
+    MatInputModule,MatButtonModule,
 
     MatCodemirrorModule,
   ],

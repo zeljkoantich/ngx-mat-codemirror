@@ -27,4 +27,7 @@ export class AppComponent {
     ]),
   });
 
+  onResetClick(event){
+    this.form.reset();
+  }
 }
