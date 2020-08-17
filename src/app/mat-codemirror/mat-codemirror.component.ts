@@ -59,7 +59,7 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
   /* called when the editor is scrolled */
   @Output() scroll = new EventEmitter<ScrollInfo>();
 
-  @ViewChild('ref') ref: ElementRef;
+  @ViewChild('ref', { static: true }) ref: ElementRef;
 
   codeMirror: EditorFromTextArea;
 
