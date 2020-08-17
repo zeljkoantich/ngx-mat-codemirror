@@ -41,7 +41,7 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
   private _differ: KeyValueDiffer<string, any>;
   private _options: any;
 
-  @HostBinding('class.ngx-mat-codemirror') private ngxMatCodemirror = true;
+  @HostBinding('class.ngx-mat-codemirror') public ngxMatCodemirror = true;
 
   /* class applied to the created textarea */
   @Input() className = '';

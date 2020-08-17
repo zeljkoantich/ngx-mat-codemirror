@@ -19,7 +19,7 @@ export class AppComponent {
       Validators.required,
     ]),
     yaml: new FormControl(`- just: write some
-- yaml: 
+- yaml:
   - [here, and]
   - {it: updates, in: real-time}
 `, [

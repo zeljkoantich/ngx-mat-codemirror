@@ -1,6 +1,6 @@
 {
   "name": "ngx-mat-codemirror",
-  "version": "1.0.4",
+  "version": "9.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -27,7 +27,13 @@
   },
   "peerDependencies": {
     "codemirror": ">=5.0.0",
-    "@types/codemirror": ">=0.0.55"
+    "@types/codemirror": ">=0.0.55",
+    "rxjs-compat": ">=6.0.0-rc.0",
+    "rxjs": ">=6.6.2",
+    "@angular/core": ">=9.0.0",
+    "@angular/forms": ">=9.0.0",
+    "@angular/cdk": ">=9.0.0",
+    "@angular/material": ">=9.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.12",
@@ -69,7 +75,6 @@
     "zone.js": "~0.10.2"
   },
   "dependencies": {
-    "rxjs-compat": "^6.0.0-rc.0",
     "tslib": "^1.10.0"
   }
 }
