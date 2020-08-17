@@ -206,7 +206,7 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
     }
   }
 
-  setOptionIfChanged(optionName: string, newValue: any) {
+  setOptionIfChanged(optionName: string | any, newValue: any) {
     if (!this.codeMirror) {
       return;
     }
