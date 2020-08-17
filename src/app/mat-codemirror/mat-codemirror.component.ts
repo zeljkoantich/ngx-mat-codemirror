@@ -1,7 +1,7 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, ElementRef, EventEmitter, HostBinding, Input, KeyValueDiffer, KeyValueDiffers, NgZone, OnDestroy, Optional, Output, Self, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { MatFormFieldControl } from '@angular/material';
+import { MatFormFieldControl } from '@angular/material/form-field';
 import { Editor, EditorChangeLinkedList, EditorFromTextArea, ScrollInfo } from 'codemirror';
 import { Subject } from 'rxjs';
 
@@ -41,7 +41,7 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
   private _differ: KeyValueDiffer<string, any>;
   private _options: any;
 
-  @HostBinding('class.ngx-mat-codemirror') private ngxMatCodemirror = true;
+  @HostBinding('class.ngx-mat-codemirror') public ngxMatCodemirror = true;
 
   /* class applied to the created textarea */
   @Input() className = '';
@@ -59,7 +59,7 @@ export class MatCodemirrorComponent implements AfterViewInit, OnDestroy, Control
   /* called when the editor is scrolled */
   @Output() scroll = new EventEmitter<ScrollInfo>();
 
-  @ViewChild('ref') ref: ElementRef;
+  @ViewChild('ref', { static: true }) ref: ElementRef;
 
   codeMirror: EditorFromTextArea;
 
