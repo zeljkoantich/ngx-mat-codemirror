@@ -32,22 +32,22 @@
     "@types/codemirror": ">=0.0.55"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.6.2",
-    "@angular/animations": "^6.1.10",
+    "@angular-devkit/build-angular": "~0.13.0",
+    "@angular/animations": "^7.2.16",
     "@angular/cdk": "^6.4.7",
-    "@angular/cli": "^6.2.9",
-    "@angular/common": "^6.1.10",
-    "@angular/compiler": "^6.1.10",
-    "@angular/compiler-cli": "^6.1.10",
-    "@angular/core": "^6.1.10",
+    "@angular/cli": "^7.3.10",
+    "@angular/common": "^7.2.16",
+    "@angular/compiler": "^7.2.16",
+    "@angular/compiler-cli": "^7.2.16",
+    "@angular/core": "^7.2.16",
     "@angular/flex-layout": "^6.0.0-beta.18",
-    "@angular/forms": "^6.1.10",
-    "@angular/http": "^6.1.10",
-    "@angular/language-service": "^6.1.10",
+    "@angular/forms": "^7.2.16",
+    "@angular/http": "^7.2.16",
+    "@angular/language-service": "^7.2.16",
     "@angular/material": "^6.4.7",
-    "@angular/platform-browser": "^6.1.10",
-    "@angular/platform-browser-dynamic": "^6.1.10",
-    "@angular/router": "^6.1.10",
+    "@angular/platform-browser": "^7.2.16",
+    "@angular/platform-browser-dynamic": "^7.2.16",
+    "@angular/router": "^7.2.16",
     "@types/codemirror": "0.0.55",
     "@types/jasmine": "^2.8.17",
     "@types/jasminewd2": "^2.0.8",
@@ -68,10 +68,11 @@
     "rxjs": "^6.6.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
-    "typescript": "~2.9.2",
+    "typescript": "~3.2.4",
     "zone.js": "^0.8.19"
   },
   "dependencies": {
-    "rxjs-compat": "^6.0.0-rc.0"
+    "rxjs-compat": "^6.0.0-rc.0",
+    "tslib": "^1.9.0"
   }
 }
