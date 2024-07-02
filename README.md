@@ -1,4 +1,6 @@
-# ngx-mat-codemirror
+# ⛔️ DEPRECATED ngx-mat-codemirror
+
+## Library is ⛔️ DEPRECATED. If you have any usage for the code you are welcome to fork it.
 
 [![Build Status](https://travis-ci.org/smnbbrv/ngx-mat-codemirror.svg?branch=master)](https://travis-ci.org/smnbbrv/ngx-mat-codemirror)
 
